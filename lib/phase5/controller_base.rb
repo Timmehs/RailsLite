@@ -10,8 +10,5 @@ module Phase5
     def initialize(req, res, route_params = {})
     end
 
-    def [](key)
-      @route_params["#{key.to_s}"]
-    end
   end
 end
