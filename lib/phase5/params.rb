@@ -9,13 +9,26 @@ module Phase5
     #
     # You haven't done routing yet; but assume route params will be
     # passed in as a hash to `Params.new` as below:
+
     def initialize(req, route_params = {})
       @params = route_params
       if req.query_string
-        parse_www_encoded_form(req.query_string).each do |string|
-          @params.merge!(route_params)
+        query_string_hash = {}
+        query = URI::decode_www_form(req.query_string)
+        query.each do |key, val|
+          # check if
+          if nested_key?(key)
+
+          else
+            query_string_hash[key] = val
+          end
         end
+        @params.merge!(query_string_hash)
       end
+    end
+
+    def nested_key?(key)
+      parse_key(key).length > 1
     end
 
     def [](key)
@@ -41,7 +54,8 @@ module Phase5
       key_vals.each do |key_set, val|
         hash = {}
         parsed_keys = parse_key(key_set).reverse
-        #build hash inside to out
+
+
         parsed_keys.each_with_index do |key, i|
           if i == 0
             hash[key] = val
