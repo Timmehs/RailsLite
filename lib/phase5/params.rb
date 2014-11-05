@@ -11,17 +11,12 @@ module Phase5
     # passed in as a hash to `Params.new` as below:
     def initialize(req, route_params = {})
       @params = route_params
-      query = parse_www_encoded_form
-      if query
-        query.each do |key, val|
-          @params[key] = val
+      if req.query_string
+        parse_www_encoded_form(req.query_string).each do |string|
+          @params.merge!(route_params)
         end
       end
     end
-
-    def parse_www_encouded_form(string)
-      nil unless string || string == ""
-      URI.decode_www_form()
 
     def [](key)
       @params["#{key}"]
@@ -31,7 +26,7 @@ module Phase5
       @params.to_json.to_s
     end
 
-    class AttributeNotFoundError < ArgumentError; end;
+    class AttributeNotFoundError < ArgumentError; end
 
     private
     # this should return deeply nested hash
@@ -39,6 +34,7 @@ module Phase5
     # user[address][street]=main&user[address][zip]=89436
     # should return
     # { "user" => { "address" => { "street" => "main", "zip" => "89436" } } }
+
     def parse_www_encoded_form(www_encoded_form)
       key_vals = URI::decode_www_form(www_encoded_form)
       hashes = []
