@@ -51,7 +51,7 @@ describe "the symphony of things" do
 
     it "saves the session after rendering content" do
       ctrlr.update_session
-      res.cookies.count.should == 1
+      res.cookies.count.should == 2
       JSON.parse(res.cookies[0].value)["token"].should == "testing"
     end
   end

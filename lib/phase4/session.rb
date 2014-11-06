@@ -32,7 +32,7 @@ module Phase4
         WEBrick::Cookie.new("_rails_lite_app", @cookie.to_json)
 
       flash_cookie =
-        WEBrick::Cookie.new("_flash", @flash.messages.to_json)
+        WEBrick::Cookie.new("_flash", flash.messages.to_json)
 
       res.cookies << session_cookie
       res.cookies << flash_cookie
