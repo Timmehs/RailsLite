@@ -9,9 +9,9 @@ module Phase3
     # pass the rendered html to render_content
     def render(template_name)
       template = ERB.new( File.read(
-          "views/#{controller_name}/#{template_name}.html.erb")
+        "views/#{controller_name}/#{template_name}.html.erb")
       )
-      
+
       render_content(template.result(binding), "text/html")
     end
 
