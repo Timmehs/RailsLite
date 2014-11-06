@@ -12,6 +12,5 @@ module Phase5
       @res = res
       @params = Params.new(@req, route_params)
     end
-
   end
 end

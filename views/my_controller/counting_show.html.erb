@@ -1,1 +1,4 @@
 <%= session["count"] %>
+<br>
+
+<%= flash[:errors].join("<br/>").html_safe %>

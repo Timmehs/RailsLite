@@ -18,5 +18,10 @@ module Phase4
     def session
       @session ||= Session.new(@req)
     end
+
+    # Method exposing a 'Flash' object
+    def flash
+      @session.flash
+    end
   end
 end

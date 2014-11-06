@@ -11,6 +11,7 @@ module Phase3
       template = ERB.new( File.read(
           "views/#{controller_name}/#{template_name}.html.erb")
       )
+      
       render_content(template.result(binding), "text/html")
     end
 

@@ -10,6 +10,7 @@ class MyController < Phase4::ControllerBase
   def go
     session["count"] ||= 0
     session["count"] += 1
+    flash[:errors] = ["uh oh", "DATS not good!"]
     render :counting_show
   end
 end
